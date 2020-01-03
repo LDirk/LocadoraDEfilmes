@@ -1,0 +1,51 @@
+import sqlite3
+connection = sqlite3.connect("locadora.db ")
+c = connection.cursor()
+
+
+def create_table_cliente():
+    c.execute("create table IF NOT EXISTS cliente "
+              "(id int, nome text, cidade text, estado text,data_nascimento, cpf text,telefone text,email text,"
+              "id_filme1 int,id_filme2 int,id_filme3 int)")
+
+
+create_table_cliente()
+
+
+def registrando_clientes():
+
+    c.execute(f"""insert into cliente (id,nome,cidade,estado,data_nascimento,cpf,telefone,email,id_filme1,
+    id_filme2,id_filme3)
+              VALUES {(i, nom, cidad, estad,nasci, cp, telefon, emai, id_fil1, id_fil2, id_fil3)}""")
+
+    connection.commit()
+
+
+def excluindo_cliente():
+    c.execute(f""" delete from cliente where id = {numero}""")
+    connection.commit()
+
+
+print("1 - Registrar cliente ")
+print("2 - Deleter cliente ")
+registrador = int(input(""))
+
+while registrador == 1:
+    i = int(input("ID do cliente: "))
+    nom = str(input("Nome: "))
+    cidad = str(input("Cidade: "))
+    estad = str(input("Estado: "))
+    nasci = str(input("Data de nascimento:"))
+    cp = str(input("CPF: "))
+    telefon = str(input("Telefone: "))
+    emai = str(input("Email: "))
+    id_fil1 = int(input("ID filme1: "))
+    id_fil2 = int(input("ID filme2: "))
+    id_fil3 = int(input("ID filme3: "))
+    registrando_clientes()
+    registrador = int(input("Digite 1 para registrar um novo cliente e qualquer tecla para sair: "))
+
+while registrador == 2:
+    numero = int(input("Digite o ID do cliente que voce deseja apagar: "))
+    excluindo_cliente()
+    registrador = int(input("Digite 2 para deleter um novo cliente e qualquer tecla para sair "))
