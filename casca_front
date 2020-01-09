@@ -1,0 +1,45 @@
+from tkinter import *
+import tkinter.messagebox as tkMessageBox
+import sqlite3
+
+
+formulario = Tk()
+formulario.geometry("500x450+0+0")
+formulario.configure(bg = "black")
+formulario.title("Sistema locadora")
+
+
+#Criando um Menu principal
+
+menuprincipal = Menu(formulario)
+mnuArquivo = Menu(menuprincipal)
+
+mnuArquivo.add_command(label="Cadastro Usuario")
+mnuArquivo.add_command(label="Atualizar dados do usuario")
+mnuArquivo.add_command(label="Apagar cliente")
+mnuArquivo.add_separator()
+mnuArquivo.add_command(label="Sair")
+
+menuprincipal.add_cascade(label="Opções", menu=mnuArquivo)
+formulario.configure(menu=menuprincipal)
+
+
+#Inserindo uma imagem no formulario
+
+imagemL= PhotoImage(file="testar.gif.gif")
+iblImagem = Label(formulario,image=imagemL).place(x=0,y=0)
+
+# função para o botao fechar
+def SAIR():
+    resultado = tkMessageBox.askquestion("Cadastro de cliente", "Tem certeza?")
+    if resultado == "Sim":
+        formulario.destroy()
+    exit()
+
+
+# botao sair
+cmd = Button(formulario,text="Sair",command = SAIR,font=("Agency FB", 8, "bold"), fg="black", bg="white").place(x=450, y=400)
+
+
+formulario.mainloop()
+
