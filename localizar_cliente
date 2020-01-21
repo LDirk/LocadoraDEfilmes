@@ -1,0 +1,12 @@
+import sqlite3
+connection = sqlite3.connect("locadora.db ")
+c = connection.cursor()
+sql = 'SELECT * FROM cliente WHERE id = ?'
+
+
+def localizar_cliente(id):
+    for row in c.execute(sql, (id,)):
+        print(row)
+
+i = int(input("ID do cliente: "))
+localizar_cliente(i)
