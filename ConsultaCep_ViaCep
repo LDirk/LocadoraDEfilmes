@@ -1,0 +1,34 @@
+import requests
+print("Consulta CEP")
+print()
+
+def main():
+
+    cep_input = input("Digite o cep: ")
+
+    #A api precisa de 8 digitos no cep
+    if len(cep_input) != 8:
+        print("Quantidade invalida")
+        exit()
+
+    #Fazendo a requisição 
+    request = requests.get('https://viacep.com.br/ws/{}/json/'.format(cep_input))
+    address_data =request.json() 
+
+
+    if 'erro' not in address_data:
+        print("------Endereço------")
+        print()
+        print('CEP: {}'.format(address_data["cep"]))
+        print('Logradouro: {}'.format(address_data["logradouro"]))
+        print('Complemento: {}'.format(address_data["complemento"]))
+        
+        print('Bairro: {}'.format(address_data["bairro"]))
+        print('Cidade: {}'.format(address_data["localidade"]))
+        print('Estado: {}'.format(address_data["uf"]))
+    
+    else:
+        print("CEP INVÁLIDO")
+
+if __name__ == '__main__':
+    main()
